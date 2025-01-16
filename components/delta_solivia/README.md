@@ -190,8 +190,8 @@ The `throttle` option for each inverter will limit the amount of state updates s
 
 | Variant | Model Name| Supported? | Parser |
 |--------|----------------------------|-----------|--------|
-| 1      | SI 2500                   | ❌        |        |
-| 3      | SI 3300                   | ❌        |        |
+| 1      | SI 2500                   | ✅        | Variant1 (untested) |
+| 3      | SI 3300                   | ✅        | Variant3 (untested) |
 | 4      | SI 5000                   | ❌        |        |
 | 9      | SOLIVIA 2.0 EU G3         | ❌        |        |
 | 11     | SI 11kW (3 phases module of CM/CS) | ❌ |        |
