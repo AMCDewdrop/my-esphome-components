@@ -28,13 +28,13 @@
 #define CONF_INV_SC_GRID_FREQUENCY "sc_grid_frequency"
 #define CONF_INV_SC_GRID_DC_INJ_CURRENT "sc_grid_dc_injection_current"
 
-#define CONF_INV_SC_MASTER_GRID_VOLTAGE "sc_grid_voltage"
-#define CONF_INV_SC_MASTER_GRID_FREQUENCY "sc_grid_frequency"
-#define CONF_INV_SC_MASTER_GRID_DC_INJ_CURRENT "sc_grid_dc_injection_current"
+#define CONF_INV_SC_MASTER_GRID_VOLTAGE "sc_master_grid_voltage"
+#define CONF_INV_SC_MASTER_GRID_FREQUENCY "sc_master_grid_frequency"
+#define CONF_INV_SC_MASTER_GRID_DC_INJ_CURRENT "sc_master_grid_dc_injection_current"
 
-#define CONF_INV_SC_SLAVE_GRID_VOLTAGE "sc_grid_voltage"
-#define CONF_INV_SC_SLAVE_GRID_FREQUENCY "sc_grid_frequency"
-#define CONF_INV_SC_SLAVE_GRID_DC_INJ_CURRENT "sc_grid_dc_injection_current"
+#define CONF_INV_SC_SLAVE_GRID_VOLTAGE "sc_slave_grid_voltage"
+#define CONF_INV_SC_SLAVE_GRID_FREQUENCY "sc_slave_grid_frequency"
+#define CONF_INV_SC_SLAVE_GRID_DC_INJ_CURRENT "sc_slave_grid_dc_injection_current"
 
 #define CONF_INV_AC_GRID_VOLTAGE "ac_grid_voltage"
 #define CONF_INV_AC_GRID_FREQ "ac_grid_frequency"
