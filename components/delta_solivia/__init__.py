@@ -139,8 +139,11 @@ SUPPORTED_VARIANTS = {
 
 def _parser_for_variant(variant):
     for variants in SUPPORTED_VARIANTS:
-        if variant in variants:
-            return SUPPORTED_VARIANTS[variants]
+        if isinstance(variant, int) and isinstance(variants, tuple):
+            if variant in variants:
+                return SUPPORTED_VARIANTS[variants]
+        else:
+            cv.Invalid(f"{variant} wrong format in variants {variants}")
     return None
 
 
@@ -160,8 +163,7 @@ def _validate_inverters(config):
     return config
 
 
-INVERTER_SCHEMA = cv.Schema(
-    {
+INVERTER_SCHEMA = cv.Schema({
         cv.GenerateID(): cv.declare_id(DeltaSoliviaInverter),
         cv.Required(CONF_INV_ADDRESS): cv.int_range(min=1),
         cv.Required(CONF_INV_VARIANT): cv.int_range(min=1, max=222),
@@ -564,16 +566,12 @@ INVERTER_SCHEMA = cv.Schema(
 )
 
 CONFIG_SCHEMA = cv.All(
-    cv.Schema(
-        {
+    cv.Schema({
             cv.GenerateID(): cv.declare_id(DeltaSoliviaComponent),
             cv.Optional(CONF_FLOW_CONTROL_PIN): pins.gpio_output_pin_schema,
             cv.Optional(CONF_HAS_GATEWAY, default=False): cv.boolean,
-            cv.Required(CONF_INVERTERS): cv.All(
-                cv.ensure_list(INVERTER_SCHEMA), _validate_inverters
-            ),
-        }
-    )
+            cv.Required(CONF_INVERTERS): cv.All(cv.ensure_list(INVERTER_SCHEMA), _validate_inverters),
+        })
     .extend(cv.polling_component_schema("5s"))
     .extend(uart.UART_DEVICE_SCHEMA)
 )
