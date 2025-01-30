@@ -2,6 +2,8 @@
 
 #include <memory>
 #include "frame-parser-base.h"
+#include "frame-parser-variant-1.h"
+#include "frame-parser-variant-3.h"
 #include "frame-parser-variant-15.h"
 #include "frame-parser-variant-212.h"
 
@@ -14,6 +16,12 @@ class FrameParser {
 public:
   // pick the correct parser for this variant
   static FrameParserInstance get_parser(uint8_t variant) {
+    if (variant == 1) {
+      return FrameParserInstance(new FrameParserVariant1());
+    }
+    if (variant == 3) {
+      return FrameParserInstance(new FrameParserVariant3());
+    }
     if (variant == 15 || variant == 18 || variant == 19 || variant == 20 || variant == 31 ||
         variant == 34 || variant == 35 || variant == 36 || variant == 38 || variant == 39 ||
         variant == 55 || variant == 58 || variant == 59 || variant == 60) {
