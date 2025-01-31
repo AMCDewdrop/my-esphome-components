@@ -156,7 +156,7 @@ def _validate_inverters(config):
     # check if variants are supported
     variants = {inverter.get(CONF_INV_VARIANT) for inverter in config}
     for variant in variants:
-        parser = None  # _parser_for_variant(variant)
+        parser = _parser_for_variant(variant)
         if parser is None:
             raise cv.Invalid(f"Variant {variant} not supported")
     return config
