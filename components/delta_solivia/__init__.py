@@ -138,13 +138,13 @@ SUPPORTED_VARIANTS = {
 
 
 def _parser_for_variant(variant):
-    for variants in SUPPORTED_VARIANTS:
-            LOGGER.warning(f"{variant} wrong format in variants {variants}")
+#    for variants in SUPPORTED_VARIANTS:
+#            LOGGER.warning(f"{variant} wrong format in variants {variants}")
 #        if isinstance(variant, int) and isinstance(variants, tuple):
 #            if variant in variants:
 #                return SUPPORTED_VARIANTS[variants]
 #        else:
-#    return None
+    return None
 
 
 def _validate_inverters(config):
