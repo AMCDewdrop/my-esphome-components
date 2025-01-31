@@ -137,14 +137,14 @@ SUPPORTED_VARIANTS = {
 }
 
 
-def _parser_for_variant(variant):
+#def _parser_for_variant(variant):
 #    for variants in SUPPORTED_VARIANTS:
 #            LOGGER.warning(f"{variant} wrong format in variants {variants}")
 #        if isinstance(variant, int) and isinstance(variants, tuple):
 #            if variant in variants:
 #                return SUPPORTED_VARIANTS[variants]
 #        else:
-    return None
+#    return None
 
 
 def _validate_inverters(config):
@@ -157,7 +157,7 @@ def _validate_inverters(config):
     # check if variants are supported
     variants = {inverter.get(CONF_INV_VARIANT) for inverter in config}
     for variant in variants:
-        parser = _parser_for_variant(variant)
+        parser = None #_parser_for_variant(variant)
         if parser is None:
             raise cv.Invalid(f"Variant {variant} not supported")
     return config
