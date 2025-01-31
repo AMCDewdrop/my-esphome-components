@@ -132,18 +132,17 @@ CONF_INV_MAX_SOLAR_ISO_RES_INPUT_1 = "max_solar_isolation_resistance_input_1"
 
 # supported variants and their parser
 SUPPORTED_VARIANTS = {
-    ( 15, 18, 19, 20, 31, 34, 35, 36, 38, 39, 55, 58, 59, 60 ): 'Variant15Parser',
-    ( 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222 ):  'Variant212Parser'
+    (1,): "Variant1Parser",
+    (3,): "Variant3Parser",
+    (15, 18, 19, 20, 31, 34, 35, 36, 38, 39, 55, 58, 59, 60): "Variant15Parser",
+    (212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222): "Variant212Parser",
 }
 
 
 def _parser_for_variant(variant):
-#    for variants in SUPPORTED_VARIANTS:
-#            LOGGER.warning(f"{variant} wrong format in variants {variants}")
-#        if isinstance(variant, int) and isinstance(variants, tuple):
-#            if variant in variants:
-#                return SUPPORTED_VARIANTS[variants]
-#        else:
+    for variants in SUPPORTED_VARIANTS:
+        if variant in variants:
+            return SUPPORTED_VARIANTS[variants]
     return None
 
 
@@ -163,7 +162,8 @@ def _validate_inverters(config):
     return config
 
 
-INVERTER_SCHEMA = cv.Schema({
+INVERTER_SCHEMA = cv.Schema(
+    {
         cv.GenerateID(): cv.declare_id(DeltaSoliviaInverter),
         cv.Required(CONF_INV_ADDRESS): cv.int_range(min=1),
         cv.Required(CONF_INV_VARIANT): cv.int_range(min=1, max=222),
@@ -566,12 +566,16 @@ INVERTER_SCHEMA = cv.Schema({
 )
 
 CONFIG_SCHEMA = cv.All(
-    cv.Schema({
+    cv.Schema(
+        {
             cv.GenerateID(): cv.declare_id(DeltaSoliviaComponent),
             cv.Optional(CONF_FLOW_CONTROL_PIN): pins.gpio_output_pin_schema,
             cv.Optional(CONF_HAS_GATEWAY, default=False): cv.boolean,
-            cv.Required(CONF_INVERTERS): cv.All(cv.ensure_list(INVERTER_SCHEMA), _validate_inverters),
-        })
+            cv.Required(CONF_INVERTERS): cv.All(
+                cv.ensure_list(INVERTER_SCHEMA), _validate_inverters
+            ),
+        }
+    )
     .extend(cv.polling_component_schema("5s"))
     .extend(uart.UART_DEVICE_SCHEMA)
 )
